@@ -69,6 +69,23 @@ for movie_list_e in movie_list:
 
 print("用户平均打分为：\n", sum(user_socre_list)/len(user_socre_list))
 
+# 画折线图以及用多项式拟合曲线
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = user_socre_list
+x = range(1, len(user_socre_list)+1)
+
+plt.plot(x, data, label='折线图')
+plt.show()
+degree = 10
+coefficients = np.polyfit(x, data, degree)
+polynomial = np.poly1d(coefficients)
+y_fit = polynomial(x)
+plt.plot(x, data, 'o', label='原始数据')
+plt.plot(x, y_fit, label='拟合曲线')
+plt.show()
+
 # 爬豆瓣分数，最好不要一起运行这段代码，这段要爬很久，推荐使用 jupyter notebook
 douban_rating_list = []
 for douban_url in movie_url_list:
